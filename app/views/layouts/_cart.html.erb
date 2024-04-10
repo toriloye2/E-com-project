@@ -1,0 +1,8 @@
+<div class="cart-text">
+  <%= link_to cart_path, class: "btn btn-outline-dark" do %>
+    </i><i class="bi bi-cart4"></i>
+    <% if current_order.present? %>
+      <%= current_order.order_items.size %>  Products in Cart  <%= number_to_currency current_order.total %>
+    <% end %>
+  <% end %>
+</div>
