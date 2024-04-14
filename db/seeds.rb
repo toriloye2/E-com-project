@@ -1,70 +1,113 @@
-require 'net/http'
-require 'json'
+#Admin User Creation
+# user = User.create(first_name: "test", last_name: "admin", email: "admin@UniMart.com", password: "Admin123", phone_number: "000000000", address: "xyz")
+# user.add_role(:admin)
+#
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
 require 'faker'
 
-# Define the method to fetch product data from the API
-require 'net/http'
-require 'json'
-
-# Define the method to fetch game data from the API
-def fetch_games_from_api(format, api_key)
-  uri = URI("https://api.mobygames.com/v1/games?format=#{format}")
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
-
-  request = Net::HTTP::Get.new(uri)
-  request['Authorization'] = "Bearer #{api_key}"
-
-  response = http.request(request)
-
-  if response.is_a?(Net::HTTPSuccess)
-    JSON.parse(response.body)
-  else
-    puts "Error fetching game data: #{response.code} - #{response.message}"
-    nil
-  end
-end
-
-
-
-# Fetch games in the desired format
-games_data = fetch_games_from_api('normal')
-
-# Process the game data as needed
-games_data['games'].each do |game|
-  # Access game attributes here and do whatever you need with them
-  puts game['title']
-  puts game['description']
-  # Add more attributes as needed
-end
-
-
-
-puts "Products Creation from API ..."
-data = fetch_products_from_api
-
-
-data.each do |product_data|
-  puts product_data.inspect  # Add this line for debugging
-  Product.create!(
-    name: product_data['name'],       # Accessing the 'name' attribute
-    description: product_data['summary'],  # Accessing the 'summary' attribute
-    price: product_data['price']      # Accessing the 'price' attribute
-    # Add more attributes as needed
-  )
-end
-
-
-# Seed the database with admin user only if it doesn't already exist
-unless AdminUser.exists?(email: 'admin@admin.com')
-  AdminUser.create!(email: 'admin@admin.com', password: 'password', password_confirmation: 'password')
-end
-
-# Seed the database with product categories
 puts "Game Categories Creation ..."
-cat1 = ProductCategory.find_or_create_by!(name: 'Game Products')
-# Define other categories as needed
+cat1 = ProductCategory.find_or_create_by! name: 'Game Products'
+cat2 = ProductCategory.find_or_create_by! name: 'Playstations'
+cat3 = ProductCategory.find_or_create_by! name: 'Xboxes'
+cat4 = ProductCategory.find_or_create_by! name: 'Cables and wire'
 
-# Seed the database with additional products
-puts "Additional Products Creation ..."
-# Add your existing product seeding logic here
+def open_asset(file_name)
+  File.open(Rails.root.join('db', 'seed_images', file_name))
+end
+
+puts "Products Creation ..."
+
+Product.destroy_all
+
+cat1.products.create!({
+                        name:  'Xbox Wireless Controller',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('5.jpg'),
+                        price: 70.99,
+                        quantity: 10
+                      })
+
+cat3.products.create!({
+                        name:  'Playstation Controller',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('2.jpeg'),
+                        price: 100.99,
+                        quantity: 10
+                      })
+
+
+cat2.products.create!({
+                        name:  "Playstation",
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('2.jpeg'),
+                        quantity: 16,
+                        price: 15.49
+                      })
+
+cat4.products.create!({
+                        name:  'Xbox',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('9.jpeg'),
+                        quantity: 18,
+                        price: 26.00
+                      })
+
+cat4.products.create!({
+                        name:  'Console',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('5.jpg'),
+                        quantity: 29,
+                        price: 200.29
+                      })
+cat2.products.create!({
+                        name:  'Controller',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('8.jpeg'),
+                        quantity: 10,
+                        price: 30.00
+                      })
+cat4.products.create!({
+                        name:  'Game',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('7.jpeg'),
+                        quantity: 10,
+                        price: 70.99
+                      })
+
+cat4.products.create!({
+                        name:  'Console Game 1',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('9.jpeg'),
+                        price: 3_052.00,
+                        quantity: 10
+                      })
+
+cat4.products.create!({
+                        name:  'Console Game 2',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('7.jpeg'),
+                        price: 987.65,
+                        quantity: 10
+                      })
+cat4.products.create!({
+                        name:  'Playstation 3',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('8.jpeg'),
+                        price: 987.65,
+                        quantity: 10
+                      })
+cat4.products.create!({
+                        name:  'Xbox Wire',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('5.jpg'),
+                        price: 300.29,
+                        quantity: 40
+                      })
+cat4.products.create!({
+                        name:  'Xbox 2',
+                        description: Faker::Hipster.paragraph,
+                        image: open_asset('7.jpeg'),
+                        price: 800.99,
+                        quantity: 80
+                      })
