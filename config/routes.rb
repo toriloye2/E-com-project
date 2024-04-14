@@ -16,6 +16,15 @@ Rails.application.routes.draw do
   get 'all_products', to: 'products#all_products', as: "all_products"
   get 'featured_products', to: 'products#featured_products', as: "featured_products"
   get 'recent_products', to: 'products#recent_products', as: "recent_products"
+
+  namespace :admin do
+    get 'home/index'
+    get '/about', to: 'home#about'
+  end
+
+
+
+
   resources :payments
   root "home#index"
 end
