@@ -4,7 +4,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders
-  has_many :user_roles
+  # has_many :user_roles
   has_many :roles, through: :user_roles, source: :role
 
   after_create :assign_default_role

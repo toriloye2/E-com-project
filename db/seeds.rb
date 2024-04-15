@@ -2,7 +2,7 @@
 # user = User.create(first_name: "test", last_name: "admin", email: "admin@UniMart.com", password: "Admin123", phone_number: "000000000", address: "xyz")
 # user.add_role(:admin)
 #
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 require 'faker'
 
