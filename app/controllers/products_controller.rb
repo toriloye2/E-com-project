@@ -8,7 +8,7 @@ class ProductsController < BaseController
   end
 
   def all_products
-    @products = params[:search].present? ? Product.joins(:product_category).where("product_categories.name ilike ? or products.name ilike ?","%#{params[:search]}%", "%#{params[:search]}%").page(params[:page]) : Product.all.page(params[:page]).per(12)
+    @products = params[:search].present? ? Product.joins(:product_category).where("product_categories.name like ? or products.name like ?","%#{params[:search]}%", "%#{params[:search]}%").page(params[:page]) : Product.all.page(params[:page]).per(12)
   end
 
   def recent_products
