@@ -6,7 +6,6 @@ class ProductsController < BaseController
     @products = Product.page(params[:page])
     @recent_products = Product.recent_products
   end
-
   def all_products
     @categories = ProductCategory.all  # Fetch all categories
     @products = if params[:search].present?
