@@ -6,6 +6,12 @@ class Order < ApplicationRecord
   enum status: { new: 0, paid: 1, shipped: 2, cancelled: 3 }, _prefix: :type
   enum payment_method: { cash_on_delivery: 0, online_payment: 1 }
 
+  # Validation
+  validates :user_id, presence: true
+  validates :status, presence: true, inclusion: { in: statuses.keys }
+  validates :payment_method, presence: true, inclusion: { in: payment_methods.keys }
+  validates_associated :order_items
+
   private
 
   def user_present
