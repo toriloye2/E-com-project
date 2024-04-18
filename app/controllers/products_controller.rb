@@ -1,6 +1,6 @@
 class ProductsController < BaseController
-
   add_breadcrumb "home", :root_path
+
   def index
     add_breadcrumb "products", products_path
     @products = Product.page(params[:page])
@@ -8,7 +8,15 @@ class ProductsController < BaseController
   end
 
   def all_products
-    @products = params[:search].present? ? Product.joins(:product_category).where("product_categories.name like ? or products.name like ?","%#{params[:search]}%", "%#{params[:search]}%").page(params[:page]) : Product.all.page(params[:page]).per(12)
+    @categories = ProductCategory.all  # Fetch all categories
+    @products = if params[:search].present?
+                  Product.joins(:product_category)
+                         .where("product_categories.id like ? or products.name like ?",
+                                "%#{params[:category_id]}%", "%#{params[:search]}%")
+                         .page(params[:page])
+               else
+                  Product.page(params[:page]).per(12)
+               end
   end
 
   def recent_products

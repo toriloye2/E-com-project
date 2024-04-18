@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_15_182200) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_18_201636) do
   create_table "abouts", force: :cascade do |t|
     t.string "title"
     t.string "content"
@@ -113,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_182200) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

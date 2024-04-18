@@ -10,6 +10,8 @@ class User < ApplicationRecord
   # has_one : user_role
 
   after_create :assign_default_role
+# Add stripe_customer_id attribute
+attribute :stripe_customer_id, :string
 
   def assign_default_role
     self.add_role(:customer) if self.roles.blank?

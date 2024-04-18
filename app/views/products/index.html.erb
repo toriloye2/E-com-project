@@ -3,7 +3,7 @@
     <h2 class="mb-3">Explore Our Products</h2>
     <%= render_breadcrumbs %>
   </div>
-  
+
   <div class="row mt-4">
     <% @products.each do |product| %>
       <div class="col-lg-3 col-md-6 mb-4">
@@ -21,18 +21,18 @@
       </div>
     <% end %>
   </div>
-  
+
   <%= paginate @products, theme: 'bootstrap-5' %>
-  
+
   <div class="text-center mt-4">
     <%= link_to "View All Products", all_products_path, class: "btn btn-primary" %>
   </div>
-  
+
   <div class="text-center mt-5">
     <h2>Recently Added Products</h2>
     <p>Updated within the last 3 days</p>
   </div>
-  
+
   <div class="row mt-4">
     <% @recent_products.each do |product| %>
       <div class="col-lg-3 col-md-6 mb-4">

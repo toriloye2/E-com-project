@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  before_action :load_categories
   helper_method :current_order
 
   def after_sign_in_path_for(resource)
@@ -20,5 +20,11 @@ class ApplicationController < ActionController::Base
         Order.new
       end
     end
+  end
+
+  private
+
+  def load_categories
+    @categories = ProductCategory.all
   end
 end

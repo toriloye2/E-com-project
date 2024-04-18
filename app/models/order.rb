@@ -1,8 +1,8 @@
 class Order < ApplicationRecord
   belongs_to :user
   has_many :order_items, dependent: :destroy
+  has_many :products, through: :order_items  # Add this line to establish the association with products
 
-  # validate :user_present
   enum status: { new: 0, paid: 1, shipped: 2, cancelled: 3 }, _prefix: :type
   enum payment_method: { cash_on_delivery: 0, online_payment: 1 }
 
