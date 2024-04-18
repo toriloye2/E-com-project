@@ -22,9 +22,6 @@ Rails.application.routes.draw do
     get '/about', to: 'home#about'
   end
 
-
-
-
   resources :payments
   root "home#index"
 end
